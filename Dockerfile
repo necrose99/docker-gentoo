@@ -5,14 +5,18 @@ MAINTAINER Necrose99
 # Use busybox binary as tar
 ADD bb /tar
 
-# Download stage3 tarball
+# Download stage3 tarball automagicall can Do latter..
+#suffix=$3 # e.g. -hardened
+#arch=$1
+#dist="http://distfiles.gentoo.org/releases/x86/autobuilds/latest-stage3-i686-hardened.txt"
+
 ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151110.tar.bz2 /
 
 # Exclude file for tar
 ADD exclude /
 
 # Extract stage3 tarball
-RUN ["/tar", "xvjpf", "stage3-amd64-20150402.tar.bz2", "-X", "exclude"]
+RUN ["/tar", "xvjpf", "stage3-i686-hardened-20151110.tar.bz2", "-X", "exclude"]
 
 # Cleanup
 RUN rm -f tar exclude stage3-amd64-20150402.tar.bz2
@@ -50,4 +54,5 @@ RUN env-update
 # The glorious shell
 CMD ["/bin/bash"]
 RUN emerge --update --changed-use --deep --with-bdeps=y @world -q
-
+RUN emerge layman 
+# RUN 
