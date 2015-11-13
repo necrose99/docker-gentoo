@@ -1,12 +1,12 @@
 FROM scratch
 
-MAINTAINER Vikraman
+MAINTAINER Necrose99
 
 # Use busybox binary as tar
 ADD bb /tar
 
 # Download stage3 tarball
-ADD http://ftp.ussg.iu.edu/linux/gentoo/releases/amd64/autobuilds/20150402/stage3-amd64-20150402.tar.bz2 /
+ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151110.tar.bz2 /
 
 # Exclude file for tar
 ADD exclude /
@@ -49,3 +49,5 @@ RUN env-update
 
 # The glorious shell
 CMD ["/bin/bash"]
+RUN emerge --update --changed-use --deep --with-bdeps=y @world -q
+
